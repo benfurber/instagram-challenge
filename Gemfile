@@ -57,6 +57,7 @@ group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
