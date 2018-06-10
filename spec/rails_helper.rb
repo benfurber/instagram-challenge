@@ -10,10 +10,10 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require 'rspec/rails'
+require 'devise'
 require 'support/factory_bot'
 require 'support/views_helper'
 require 'database_cleaner'
-require 'devise'
 
 
 Rails.application.eager_load!
