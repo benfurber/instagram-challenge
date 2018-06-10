@@ -4,7 +4,8 @@ RSpec.describe "posts/new", type: :view do
   before(:each) do
     assign(:post, Post.new(
       :description => "MyText",
-      :image => ""
+      :image => File.open("#{::Rails.root}/spec/support/test.jpg"),
+      :user => @user
     ))
   end
 

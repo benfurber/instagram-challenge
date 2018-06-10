@@ -2,21 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "posts/index", type: :view do
   before(:each) do
-    assign(:posts, [
-      Post.create!(
-        :description => "MyText",
-        :image => ""
-      ),
-      Post.create!(
-        :description => "MyText",
-        :image => ""
-      )
-    ])
+    @posts = [assign_post]
   end
 
   it "renders a list of posts" do
     render
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
+    expect(rendered).to have_content(@posts.last.description)
   end
 end
