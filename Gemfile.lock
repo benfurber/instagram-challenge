@@ -210,6 +210,8 @@ GEM
     selenium-webdriver (3.12.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    semantic-ui-sass (2.3.1.2)
+      sass (>= 3.2)
     simplecov (0.15.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -275,6 +277,7 @@ DEPENDENCIES
   rspec-rails (~> 3.7.0)
   sass-rails (~> 5.0)
   selenium-webdriver
+  semantic-ui-sass
   simplecov
   simplecov-console
   spring

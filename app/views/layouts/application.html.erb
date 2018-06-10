@@ -11,10 +11,13 @@
 
   <body>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= semantic_flash %>
 
-    <%= yield %>
+    <div class="ui text container">
+
+      <%= yield %>
+
+    </div>
 
     <div id="account-bar">
       <% if user_signed_in? %>

@@ -4,7 +4,7 @@
 
 <% @posts.each do |post| %>
   <div>
-    <p><%= image_tag post.image %></p>
+    <p><%= image_tag post.image, class: "ui full rounded image" %></p>
     <p>@<%= post.user.username %></p>
     <p><%= post.description %></p>
     <p><%= link_to 'Show', post %></p>

@@ -5,8 +5,13 @@ RSpec.describe "posts/show", type: :view do
     @post = assign_post
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes in" do
     render
     expect(rendered).to have_content(@post.description)
+  end
+
+  it "renders comments section" do
+    render
+    expect(rendered).to have_content("Add your comment")
   end
 end

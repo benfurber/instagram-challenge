@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.5'
 # To make all the login stuff work
 gem 'devise'
 
+gem 'semantic-ui-sass'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem "aws-sdk-s3", require: false

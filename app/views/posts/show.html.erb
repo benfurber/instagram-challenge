@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p><%= image_tag @post.image %></p>
+<p><%= image_tag @post.image, class: "ui full rounded image" %></p>
 <p>@<%= @post.user.username %></p>
 <p><%= @post.description %></p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
+
+<%= render partial: 'comments', locals: { comment: @comment } %>
+
 <%= link_to 'Back', posts_path %>
