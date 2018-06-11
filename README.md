@@ -26,4 +26,4 @@ Next was posts, generated with scaffold for a full RESTful mode and more editing
 
 Comments. Done too, though only just - and with poor test coverage.
 
-(The stories that I drafted can be found here)[https://github.com/benfurber/instagram-challenge/tree/master/docs/stories.md]
+[The stories that I drafted can be found here](https://github.com/benfurber/instagram-challenge/tree/master/docs/stories.md)
