@@ -1,0 +1,6 @@
+<h1>Editing Comment</h1>
+
+<%= render 'form', post: comment %>
+
+<%= link_to 'Show', @comment.commentable.id %> |
+<%= link_to 'Back', posts_path %>

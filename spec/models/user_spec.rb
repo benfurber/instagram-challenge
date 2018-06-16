@@ -1,18 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   before (:each) do
     @user = create(:user)
   end
 
-  context '#create' do
-    it 'has an email address' do
-      expect(User.all.last.email).to eq @user.email
-    end
+  it { is_expected.to have_db_column(:email).of_type(:string) }
+  it { is_expected.to have_db_column(:username).of_type(:string) }
 
-    it 'has a username' do
-      expect(User.all.last.username).to eq @user.username
-    end
-  end
+  it { is_expected.to have_many(:comments) }
 end

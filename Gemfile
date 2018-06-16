@@ -61,8 +61,10 @@ group :test do
   gem 'chromedriver-helper'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem 'factory_bot_rails'
-  gem "rubocop", "0.48.1"
-  gem "rubocop-rails"
+  gem 'rails-controller-testing'
+  gem 'rubocop', '0.48.1'
+  gem 'rubocop-rails'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false

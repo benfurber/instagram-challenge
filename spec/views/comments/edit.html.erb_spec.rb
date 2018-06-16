@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "comments/edit", type: :view do
   before(:each) do
+    user = create(:user)
+    post = create(:post, 'user' => user)
     @comment = assign(:comment, Comment.create!(
-      :user => 1,
-      :body => "MyText",
-      :post => 1
+      :user => user,
+      :content => "Boring test content",
+      :commentable => post
     ))
   end
 
