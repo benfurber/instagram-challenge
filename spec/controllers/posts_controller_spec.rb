@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
-
   before (:each) do
     @test_user = create(:user)
     sign_in(@test_user)
     @post = create(:post, user: @test_user)
   end
+
   let(:valid_attributes) { @post }
   let(:invalid_attributes) {}
 
@@ -37,7 +37,7 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
+  describe "GET #edit", :tag do
     it "returns a success response" do
       get :edit, params: {id: @post.to_param}, session: valid_session
       expect(response).to have_http_status(200)
