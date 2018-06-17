@@ -2,17 +2,18 @@ require 'rails_helper'
 
 RSpec.describe "comments/show", type: :view do
   before(:each) do
-    @comment = assign(:comment, Comment.create!(
-      :user => 2,
-      :body => "MyText",
-      :post => 3
-    ))
+    @user = create(:user)
+    @post = create(:post, 'user' => @user)
+    @comment = create(
+      :comment,
+      :user => @user,
+      :commentable => @post
+    )
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/3/)
+    expect(rendered).to match(@comment.user.username)
+    expect(rendered).to match(@comment.content)
   end
 end

@@ -1,7 +1,15 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
     @commentable = find_commentable
     @comments = @commentable.comments
+  end
+
+  def show
+    @comments = @post.comments.all
+    @comment = @post.comments.build
   end
 
   def create
@@ -34,6 +42,10 @@ class CommentsController < ApplicationController
 
   private
 
+  def set_post
+    @comment = Comment.find(params[:id])
+  end
+
   def find_commentable
     params.each do |name, value|
       if name =~ /(.+)_id$/
@@ -43,5 +55,9 @@ class CommentsController < ApplicationController
     nil
   end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
 end
