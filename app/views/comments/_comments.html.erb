@@ -1,0 +1,17 @@
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+    <div>
+      <div class="ui horizontal divider">
+        <i class="user secret icon"></i>
+        <%= comment.user.username %>
+      </div>
+
+      <div class="ui divider"></div>
+        <p><%= comment.content %></p>
+      <div class="ui divider"></div>
+    </div>
+  <% end %>
+
+  <%= render partial: 'comments/form', locals: { comment: @comment } %>
+
+</div>

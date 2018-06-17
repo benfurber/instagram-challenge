@@ -13,7 +13,7 @@ RSpec.describe "comments/show", type: :view do
 
   it "renders attributes" do
     render
-    expect(rendered).to match(@comment.user.username)
+    expect(rendered).to match(@user.username)
     expect(rendered).to match(@comment.content)
   end
 end

@@ -1,5 +1,1 @@
-<div id="comments">
-  <% @post.comments.each do |comment| %>
-    <%= render partial: 'comment', locals: { comment: comment } %>
-  <% end %>
-</div>
+<%= render partial: 'comments', locals: { comment: @comment } %>

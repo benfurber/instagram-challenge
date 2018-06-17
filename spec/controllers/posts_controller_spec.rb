@@ -1,45 +1,57 @@
 require 'rails_helper'
+include ActionDispatch::TestProcess
 
 RSpec.describe PostsController, type: :controller do
 
-  before (:each) do
-    @test_user = create(:user)
-    sign_in(@test_user)
-    @post = create(:post, user: @test_user)
-  end
+  let(:user) { create(:user) }
+  let(:new_post) { create(:post, 'user' => user) }
+  let(:valid_attributes) { {
+    description: "TESTING",
+    image: test_image,
+    user: @user
+  } }
 
-  let(:valid_attributes) { @post }
-  let(:invalid_attributes) {}
+  let(:test_image) {
+    fixture_file_upload(Rails.root.join('spec', 'support', 'test.jpg'), 'image/jpeg')
+  }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # PostsController. Be sure to keep this updated too.
+  let(:invalid_attributes) { {
+    'description' => nil,
+    'user' => 'dsfg',
+    'zero' => 0
+  }}
   let(:valid_session) { {} }
+
+  before(:each) do
+    @post = create(:post, 'user' => user)
+    allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
+  end
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: {}
       expect(response).to have_http_status(200)
     end
   end
 
   describe "GET #show" do
     it "returns a success response" do
-      get :show, params: {id: @post.to_param}, session: valid_session
+      get :show, params: {id: @post.id}
       expect(response).to have_http_status(200)
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: {}
       expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET #edit", :tag do
+  describe "GET #edit" do
     it "returns a success response" do
-      get :edit, params: {id: @post.to_param}, session: valid_session
+      get :edit, params: {id: @post.id}
       expect(response).to have_http_status(200)
     end
   end
@@ -47,7 +59,49 @@ RSpec.describe PostsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Post" do
-        expect { create(:post, user: @test_user) }.to change(Post, :count).by(1)
+        expect {
+          post :create, params: { post: valid_attributes }
+        }.to change(Post, :count).by(1)
+      end
+
+      it "redirects to the created post" do
+        post :create, params: {post: valid_attributes}
+        expect(response).to redirect_to(Post.last)
+      end
+    end
+
+    context "with invalid params" do
+      it "returns a success response (i.e. to display the 'new' template)" do
+        post :create, params: {post: invalid_attributes}
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    context "with valid params" do
+      let(:new_description) { "Very different test content!" }
+      let(:new_attributes) { {
+        description: new_description,
+        image: test_image,
+        user: @user
+      } }
+
+      it "updates the requested post" do
+        put :update, params: {id: @post.id, post: new_attributes}
+        expect(@post.reload.description).to eq(new_description)
+      end
+
+      it "redirects to the post" do
+        put :update, params: {id: @post.id, post: valid_attributes}
+        expect(response).to redirect_to(@post)
+      end
+    end
+
+    context "with invalid params" do
+      it "returns a success response (i.e. to display the 'edit' template)" do
+        put :update, params: {id: @post.id, post: invalid_attributes}
+        expect(response).to have_http_status(200)
       end
     end
   end
@@ -55,12 +109,12 @@ RSpec.describe PostsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested post" do
       expect {
-        delete :destroy, params: {id: @post.to_param}, session: valid_session
+        delete :destroy, params: {id: @post.id}, session: valid_session
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
-      delete :destroy, params: {id: @post.to_param}, session: valid_session
+      delete :destroy, params: {id: @post.id}, session: valid_session
       expect(response).to redirect_to(posts_url)
     end
   end
