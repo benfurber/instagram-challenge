@@ -60,6 +60,7 @@ group :test do
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem 'factory_bot_rails'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 3.0'
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
 end
